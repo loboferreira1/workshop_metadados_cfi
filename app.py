@@ -39,7 +39,7 @@ st.markdown(
         background-color: rgba(255, 255, 255, 0.88);
         border-radius: 20px;
         padding: 2rem 2.5rem;
-        margin-top: 1rem;
+        margin-top: 5rem;
     }}
     .arte-campanha {{
         position: fixed;
@@ -89,7 +89,7 @@ st.markdown(
         div.block-container,
         div[data-testid="stAppViewBlockContainer"] {{
             padding: 1rem 0.75rem;
-            margin-top: 0.25rem;
+            margin-top: 4.5rem;
             border-radius: 14px;
         }}
         .cabecalho {{

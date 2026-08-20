@@ -1,4 +1,5 @@
 import streamlit as st
+import math
 from PIL import Image
 from PIL.ExifTags import TAGS, GPSTAGS
 import pandas as pd
@@ -144,6 +145,8 @@ def get_decimal_coordinates(dms, ref):
         decimal = degrees + minutes + seconds
         if ref in ["S", "W"]:
             decimal = -decimal
+        if math.isnan(decimal):
+            return None
         return decimal
     except Exception:
         return None
@@ -178,13 +181,15 @@ def extract_gps(exif_data: dict):
 
 def show_verdict(exif_data: dict, lat, lon):
     """Veredito automático com base nos metadados encontrados."""
+    has_gps = lat is not None and lon is not None and not math.isnan(lat) and not math.isnan(lon)
+
     if not exif_data:
         st.warning(
             "🧹 **Esta foto NÃO tem metadados.** "
             "Pode ser print, imagem baixada do WhatsApp "
             "ou uma foto editada/salva de novo."
         )
-    elif lat is not None and lon is not None:
+    elif has_gps:
         st.error(
             "🚨 **PERIGO!** Esta foto é original e revela "
             "sua **localização exata**!"
@@ -195,6 +200,8 @@ def show_verdict(exif_data: dict, lat, lon):
 
 def show_metadata(exif_data: dict, lat, lon):
     """Mostra os metadados principais em cartões."""
+    has_gps = lat is not None and lon is not None and not math.isnan(lat) and not math.isnan(lon)
+
     with st.container(border=True):
         col1, col2 = st.columns(2)
 
@@ -209,12 +216,12 @@ def show_metadata(exif_data: dict, lat, lon):
 
     with st.container(border=True):
         st.markdown("**📍 Localização (GPS)**")
-        if lat is not None and lon is not None:
+        if has_gps:
             st.success(f"Latitude: `{lat:.6f}`  |  Longitude: `{lon:.6f}`")
 
             # Mapa
             df = pd.DataFrame({"lat": [lat], "lon": [lon]})
-            st.map(df, zoom=14, width="stretch", height=300)
+            st.map(df, zoom=14, use_container_width=True, height=300)
         else:
             st.info("Esta foto **não contém** coordenadas GPS.")
 

@@ -1,3 +1,5 @@
 streamlit>=1.50
 pillow>=10
 pandas>=2
+
+# `math` é da biblioteca padrão do Python — não precisa entrar aqui.

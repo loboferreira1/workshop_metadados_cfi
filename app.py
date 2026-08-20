@@ -54,18 +54,23 @@ st.markdown(
     .cabecalho {{
         display: flex;
         align-items: center;
-        justify-content: center;
-        gap: 14px;
-        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 12px;
+        flex-wrap: nowrap;
         margin-bottom: 0.75rem;
     }}
     .cabecalho .logo {{
-        height: 76px;
+        height: 68px;
         width: auto;
+        flex: 0 0 auto;
         border-radius: 10px;
     }}
+    .cabecalho .titulo {{
+        flex: 1 1 auto;
+        min-width: 0;
+    }}
     .cabecalho .titulo h1 {{
-        font-size: clamp(1.4rem, 4vw, 2.1rem);
+        font-size: clamp(1.3rem, 3.4vw, 2rem);
         text-align: center;
         margin: 0 0 0.2rem 0;
         line-height: 1.15;
@@ -86,6 +91,14 @@ st.markdown(
             padding: 1rem 0.75rem;
             margin-top: 0.25rem;
             border-radius: 14px;
+        }}
+        .cabecalho {{
+            flex-wrap: wrap;
+            justify-content: center;
+        }}
+        .cabecalho .titulo {{
+            flex: 1 1 100%;
+            order: 2;
         }}
         .cabecalho .logo {{
             height: 52px;

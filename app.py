@@ -244,7 +244,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
+#
 st.info(
     "🔒 **Privacidade:** Tudo acontece só na sua sessão. "
     "Quando você fecha esta página, os dados desaparecem. "

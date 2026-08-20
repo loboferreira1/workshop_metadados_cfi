@@ -51,6 +51,51 @@ st.markdown(
         pointer-events: none;
         opacity: 0.92;
     }}
+    .cabecalho {{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+        margin-bottom: 0.75rem;
+    }}
+    .cabecalho .logo {{
+        height: 76px;
+        width: auto;
+        border-radius: 10px;
+    }}
+    .cabecalho .titulo h1 {{
+        font-size: clamp(1.4rem, 4vw, 2.1rem);
+        text-align: center;
+        margin: 0 0 0.2rem 0;
+        line-height: 1.15;
+    }}
+    .cabecalho .titulo p {{
+        text-align: center;
+        margin: 0;
+        color: #555;
+        font-size: 0.95rem;
+    }}
+    /* Telas pequenas (celulares) */
+    @media (max-width: 768px) {{
+        .stApp {{
+            background-attachment: scroll;  /* correção iOS/Safari */
+        }}
+        div.block-container,
+        div[data-testid="stAppViewBlockContainer"] {{
+            padding: 1rem 0.75rem;
+            margin-top: 0.25rem;
+            border-radius: 14px;
+        }}
+        .cabecalho .logo {{
+            height: 52px;
+        }}
+        .arte-campanha {{
+            width: 110px;
+            right: -12px;
+            opacity: 0.4;
+        }}
+    }}
     </style>
     <div class="arte-campanha">
         <img src="data:image/png;base64,{img_b64('art/arte.png')}" style="width:100%;">
@@ -165,21 +210,20 @@ def show_metadata(exif_data: dict, lat, lon):
 # INTERFACE PRINCIPAL
 # ============================================================
 
-# Cabeçalho com logos institucionais
-col_cgi, col_titulo, col_dpt = st.columns([1, 4, 1], vertical_alignment="center")
-with col_cgi:
-    st.image("art/cgi.png", width=90)
-with col_titulo:
-    st.markdown(
-        "<h1 style='text-align:center; margin:0 0 .2rem 0;'>📸 O que sua foto revela?</h1>",
-        unsafe_allow_html=True,
-    )
-    st.markdown(
-        "<p style='text-align:center; margin:0;'>Demonstração de Segurança Operacional</p>",
-        unsafe_allow_html=True,
-    )
-with col_dpt:
-    st.image("art/dpt.png", width=90)
+# Cabeçalho responsivo com logos institucionais
+st.markdown(
+    f"""
+    <div class="cabecalho">
+        <img class="logo" src="data:image/png;base64,{img_b64('art/cgi.png')}">
+        <div class="titulo">
+            <h1>📸 O que sua foto revela?</h1>
+            <p>Demonstração de Segurança Operacional</p>
+        </div>
+        <img class="logo" src="data:image/png;base64,{img_b64('art/dpt.png')}">
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.info(
     "🔒 **Privacidade:** Tudo acontece só na sua sessão. "

@@ -1,0 +1,12 @@
+# Arquivos locais que não vão para o repositório
+.vscode/
+__pycache__/
+*.pyc
+.DS_Store
+
+# Fotos de teste (não versionar imagens pessoais)
+/*.jpeg
+/*.jpg
+/*.heic
+/*.webp
+/*.png
